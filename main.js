@@ -40,8 +40,6 @@ export function handleSummary(data) {
 
   const html = generateSummaryReport(data, timestamp, filename,stages, maxDuration);
 
-  console.log(data)
-
   // Return HTML summary
   return {
     [filename]: html,
