@@ -6,13 +6,20 @@ import { textSummary } from "https://jslib.k6.io/k6-summary/0.0.1/index.js";
 
 const maxVU = parseInt(__ENV.MAX_VU) || 20; // Default to 20 if MAX_VU is not set
 
+const maxDuration = parseInt(__ENV.MAX_DURATION) || 60; // Default to 60 seconds if MAX_DURATION is not set
+
 const stages = [
-  { duration: "5s", target: Math.floor(maxVU * 0.25) }, // Ramp up to 25% of max VUs
-  { duration: "10s", target: Math.floor(maxVU * 0.5) }, // Stay at 50% of max VUs
-  { duration: "10s", target: maxVU }, // Ramp up to max VUs
-  { duration: "5s", target: maxVU }, // Hold at max VUs
-  { duration: "10s", target: Math.floor(maxVU * 0.25) }, // Ramp down to 25% of max VUs
-  { duration: "5s", target: 0 }, // Gradually stop all VUs
+  {
+    duration: `${Math.floor(maxDuration * 0.2)}s`,
+    target: Math.floor(maxVU * 0.5),
+  }, // Ramp up to 50% of max VUs
+  {
+    duration: `${Math.floor(maxDuration * 0.3)}s`,
+    target: Math.floor(maxVU * 0.5),
+  }, // Hold at 50% of max VUs
+  { duration: `${Math.floor(maxDuration * 0.2)}s`, target: maxVU }, // Ramp up to max VUs
+  { duration: `${Math.floor(maxDuration * 0.2)}s`, target: maxVU }, // Hold at max VUs
+  { duration: `${Math.floor(maxDuration * 0.1)}s`, target: 0 }, // Gradually stop all VUs
 ];
 
 export const options = {
