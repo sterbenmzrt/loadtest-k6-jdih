@@ -2,7 +2,7 @@ export function generateSummaryReport(data, timestamp, filename, stages, maxDura
   const vus = data.metrics.vus_max.values.value;
   const duration = maxDuration;
   const totalRequests = data.metrics.http_reqs.values.count;
-  const failedRequests = data.metrics.http_req_failed.values.fails;
+  const failedRequests = data.metrics.http_req_failed.values.passes;
   const passedChecks = data.metrics.checks.values.passes;
   const failedChecks = data.metrics.checks.values.fails;
   const avgResponseTime = data.metrics.http_req_duration.values.avg.toFixed(2);
