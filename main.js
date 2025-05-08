@@ -2,6 +2,7 @@ import { ArticleScenarioInit } from "./scenarios/article.js";
 import { DocumentScenarioInit } from "./scenarios/document.js";
 import { HomeScenarioInit } from "./scenarios/home.js";
 import { generateSummaryReport } from "./utils/generateHtml.js";
+import { textSummary } from "https://jslib.k6.io/k6-summary/0.0.1/index.js";
 
 const maxVU = parseInt(__ENV.MAX_VU) || 20; // Default to 20 if MAX_VU is not set
 
@@ -30,13 +31,12 @@ export function handleSummary(data) {
   const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
   const filename = `reports/html/reports.html`;
 
-  console.log(data);
-
   const html = generateSummaryReport(data, timestamp, filename,stages);
 
   // Return HTML summary
   return {
     [filename]: html,
+    stdout: textSummary(data, { indent: "  " }), // Print the default summary to the terminal
   };
 }
 
