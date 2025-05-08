@@ -38,7 +38,9 @@ export function handleSummary(data) {
   const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
   const filename = `reports/html/reports.html`;
 
-  const html = generateSummaryReport(data, timestamp, filename,stages);
+  const html = generateSummaryReport(data, timestamp, filename,stages, maxDuration);
+
+  console.log(data)
 
   // Return HTML summary
   return {
