@@ -28,7 +28,7 @@ export default function () {
 
 export function handleSummary(data) {
   const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
-  const filename = `reports/html/summary-${timestamp}.html`;
+  const filename = `reports/html/reports.html`;
 
   console.log(data);
 
