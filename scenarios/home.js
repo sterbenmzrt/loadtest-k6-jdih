@@ -16,7 +16,7 @@ export function AccessHome() {
         { 
           "status is 200": (r) => r.status === 200,
           // "body is present": (r) => r.body.includes(route.bodyHtml),
-          "transaction time not more than 2000ms": (r) => r.timings.duration > 2000
+          "transaction time not more than 2000ms": (r) => r.timings.duration <= 2000
         });
     });
     });
